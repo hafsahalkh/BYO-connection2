@@ -1,0 +1,33 @@
+{
+  "version": 7,
+  "stage": "planning",
+  "pending": {
+    "kind": "question",
+    "phase": "planning",
+    "askedAt": "2026-06-29T20:04:33.485Z",
+    "requestedAt": "2026-06-29T20:04:33.485Z",
+    "summary": "Round 1: cut-off patient-track scope + EMR/provider-review architecture (in-app console vs external EMR) and pharmacy fulfillment handoff"
+  },
+  "questionRounds": {
+    "planning": 1,
+    "design": 0
+  },
+  "artifacts": {
+    "roadmap": {
+      "path": "memory/roadmap.md",
+      "version": null,
+      "archivedPath": null,
+      "approvedVersion": null
+    },
+    "design": {
+      "path": "memory/design-brief.md",
+      "version": null,
+      "archivedPath": null,
+      "approvedVersion": null,
+      "guidelinesPath": "memory/design-guidelines.json",
+      "guidelinesArchivedPath": null
+    }
+  },
+  "lastSummary": "Loaded telehealth planning skills; asked round 1 clarification on patient-track scope and EMR/provider-review + pharmacy fulfillment architecture.",
+  "updatedAt": "2026-06-29T20:04:33.566Z"
+}
