@@ -84,11 +84,13 @@ The coherent product the marketplace is incoherent without — broader than the 
 - **Topology: single operating organization** (not multi-clinic / multi-tenant); patients are scoped to the one operating org.
 
 ## What's Been Implemented
-- [ ] Landing / marketing home (design anchor)
-- [ ] Peptide catalog + product detail (browse surface)
-- [ ] Patient auth (sign-up + sign-in)
-- [ ] Product/condition-specific intake questionnaire (flow stops before payment)
-- [ ] Patient "My Orders / Intake Status" authenticated screen
+- [x] Landing / marketing home (design anchor) — public hero, value props, catalog teaser, footer
+- [x] Peptide catalog + product detail (browse surface) — 6 seeded peptides, real Convex-backed listing and detail pages
+- [x] Patient auth (sign-up + sign-in) — shared Better Auth email/password flow; seeded patient example login verified
+- [x] Product/condition-specific intake questionnaire — 6-section funnel (personal, contact, medical history, allergies, medications, consent) with resume/progress tracking; completing consent creates a pre-payment order and stops before any payment step
+- [x] Patient "My Orders / Intake Status" authenticated screen — renders the patient's real orders and intake status via Convex queries
+
+> First build slice complete. Patient-only, zero third-party integrations, order/intake flow stops before payment by design.
 
 > Update this section as features are built. Check items off as they become real.
 

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "enabled": true,
+  "authMode": "better-auth-email-password",
+  "loginPath": "/login",
+  "seedFunctionCliName": "authSeed:exampleLogins",
+  "roles": [
+    {
+      "roleKey": "patient",
+      "roleLabel": "Patient",
+      "seedName": "Patient Example",
+      "seedEmail": "patient@specode.ai",
+      "roleFingerprint": "patient-v1-email-password-intake-orders"
+    }
+  ]
+}

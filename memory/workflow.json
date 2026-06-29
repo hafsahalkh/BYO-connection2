@@ -1,13 +1,7 @@
 {
   "version": 7,
   "stage": "implementation",
-  "pending": {
-    "kind": "question",
-    "phase": "implementation",
-    "askedAt": "2026-06-29T20:43:08.070Z",
-    "requestedAt": "2026-06-29T20:43:08.070Z",
-    "summary": "First-build slice proposal posted: patient-only landing-led slice — landing, catalog+detail, auth+intake funnel (stops before payment), My Orders/Intake Status with real data. Zero integrations. Awaiting approve/continue to start build."
-  },
+  "pending": null,
   "questionRounds": {
     "planning": 2,
     "design": 1
@@ -28,6 +22,6 @@
       "guidelinesArchivedPath": "memory/design-guidelines/design-guidelines-20260629T203553Z.json"
     }
   },
-  "lastSummary": "First-build slice proposal posted for PeptideRx patient entry path; awaiting user approval to begin implementation.",
-  "updatedAt": "2026-06-29T20:43:08.152Z"
+  "lastSummary": "Completed PeptideRx first build slice. All four surfaces built and verified: landing, catalog + product detail, shared patient auth + 6-section intake funnel (stops before payment), and real My Orders / Intake Status screen. 6 products seeded in Convex. Patient example login seeded and sign-in verified end-to-end (HTTP 200 + session). Convex sync, pnpm lint, and production build all pass.",
+  "updatedAt": "2026-06-29T20:59:32.961Z"
 }

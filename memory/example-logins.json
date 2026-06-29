@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "authMode": "better-auth-email-password",
+  "loginPath": "/login",
+  "updatedAt": "2026-06-29T20:58:33.000Z",
+  "accounts": [
+    {
+      "roleKey": "patient",
+      "roleLabel": "Patient",
+      "email": "patient@specode.ai",
+      "password": "Specode@123",
+      "name": "Patient Example",
+      "roleFingerprint": "patient-v1-email-password-intake-orders"
+    }
+  ]
+}

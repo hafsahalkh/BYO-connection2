@@ -1,33 +1,64 @@
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { SpecodeIframeTracker } from "@/components/layout/SpecodeIframeTracker";
-
-function SpecodeMark() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="preview-placeholder-mark"
-      viewBox="0 6 24 16"
-      fill="none"
-    >
-      <path
-        d="M0 12C0 8.68629 2.68629 6 6 6H12L7 13L12.7378 7.97938C14.1962 6.70334 16.0681 6 18.0059 6H24V14C24 18.4183 20.4183 22 16 22H8C3.58172 22 0 18.4183 0 14V12Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
+import { HIPAABanner } from "@/components/layout/HIPAABanner";
+import { RequireAuth } from "@/components/layout/RequireAuth";
+import { LandingPage } from "@/pages/LandingPage";
+import { CatalogPage } from "@/pages/CatalogPage";
+import { ProductDetailPage } from "@/pages/ProductDetailPage";
+import { SignupPage } from "@/pages/SignupPage";
+import { LoginPage } from "@/pages/LoginPage";
+import { IntakeFunnelPage } from "@/pages/IntakeFunnelPage";
+import { IntakeCompletePage } from "@/pages/IntakeCompletePage";
+import { OrdersPage } from "@/pages/OrdersPage";
 
 export default function App() {
   return (
-    <>
+    <BrowserRouter>
       <SpecodeIframeTracker />
-      <main className="preview-placeholder-shell">
-        <div className="preview-placeholder-content">
-          <SpecodeMark />
-          <p className="preview-placeholder-copy">
-            Specode is planning your app...
-          </p>
-        </div>
-      </main>
-    </>
+      <HIPAABanner />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/catalog" element={<CatalogPage />} />
+        <Route path="/catalog/:slug" element={<ProductDetailPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
+
+        <Route
+          path="/intake/complete"
+          element={
+            <RequireAuth>
+              <IntakeCompletePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/intake"
+          element={
+            <RequireAuth>
+              <IntakeFunnelPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/intake/:step"
+          element={
+            <RequireAuth>
+              <IntakeFunnelPage />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/orders"
+          element={
+            <RequireAuth>
+              <OrdersPage />
+            </RequireAuth>
+          }
+        />
+
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
