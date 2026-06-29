@@ -1,15 +1,12 @@
 {
   "version": 7,
-  "stage": "design",
+  "stage": "implementation",
   "pending": {
-    "kind": "review",
-    "phase": "design",
-    "artifact": "design",
-    "path": "memory/design-brief.md",
-    "version": 1,
-    "askedAt": "2026-06-29T20:39:03.128Z",
-    "requestedAt": "2026-06-29T20:39:03.128Z",
-    "summary": "Warm-but-clinically-grounded direction for PeptideRx: warm off-white base, deep botanical green primary, muted terracotta secondary; editorial-premium landing, calm clinical intake/orders. Concrete tokens captured for implementation."
+    "kind": "question",
+    "phase": "implementation",
+    "askedAt": "2026-06-29T20:43:08.070Z",
+    "requestedAt": "2026-06-29T20:43:08.070Z",
+    "summary": "First-build slice proposal posted: patient-only landing-led slice — landing, catalog+detail, auth+intake funnel (stops before payment), My Orders/Intake Status with real data. Zero integrations. Awaiting approve/continue to start build."
   },
   "questionRounds": {
     "planning": 2,
@@ -26,11 +23,11 @@
       "path": "memory/design-brief.md",
       "version": 1,
       "archivedPath": "memory/design-briefs/design-brief-20260629T203553Z.md",
-      "approvedVersion": null,
+      "approvedVersion": 1,
       "guidelinesPath": "memory/design-guidelines.json",
       "guidelinesArchivedPath": "memory/design-guidelines/design-guidelines-20260629T203553Z.json"
     }
   },
-  "lastSummary": "Warm-but-clinically-grounded direction for PeptideRx: warm off-white base, deep botanical green primary, muted terracotta secondary; editorial-premium landing, calm clinical intake/orders. Concrete tokens captured for implementation.",
-  "updatedAt": "2026-06-29T20:39:03.200Z"
+  "lastSummary": "First-build slice proposal posted for PeptideRx patient entry path; awaiting user approval to begin implementation.",
+  "updatedAt": "2026-06-29T20:43:08.152Z"
 }
