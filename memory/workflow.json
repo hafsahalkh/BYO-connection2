@@ -1,13 +1,7 @@
 {
   "version": 7,
   "stage": "implementation",
-  "pending": {
-    "kind": "question",
-    "phase": "implementation",
-    "askedAt": "2026-06-29T21:07:13.569Z",
-    "requestedAt": "2026-06-29T21:07:13.569Z",
-    "summary": "User wants intake reachable without prior login (reverse signup-first). Coordinator proposed guest-first intake with account creation moved to the final submit step (consent/place order) so the order ties to a real patient + My Orders. Awaiting confirmation or alternative (fully anonymous)."
-  },
+  "pending": null,
   "questionRounds": {
     "planning": 2,
     "design": 1
@@ -28,6 +22,6 @@
       "guidelinesArchivedPath": "memory/design-guidelines/design-guidelines-20260629T203553Z.json"
     }
   },
-  "lastSummary": "Flow-change request: make intake completable without prior login. Proposed guest-first intake with account creation at final submit; awaiting user confirmation before implementing.",
-  "updatedAt": "2026-06-29T21:07:13.652Z"
+  "lastSummary": "User clarified: they do NOT want guest intake. Login should be REQUIRED to complete intake (rejecting the guest-first proposal). Task is to ensure the intake flow gates completion behind authentication.",
+  "updatedAt": "2026-06-29T21:11:41.002Z"
 }
