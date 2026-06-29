@@ -25,3 +25,8 @@ D2C telehealth marketplace for peptide therapies. Landing-led; real prescription
 ## Open / To Confirm
 - Direction is pending user review. If it reads too warm or not clinical enough, that is the primary correction lever.
 - No reference assets were provided.
+
+## Durable Implementation Notes
+- **Transactional email (Mailgun)**: Delivery runs through the Specode-managed Mailgun relay (mode `specode_managed`, provisioned internally). No user env setup (MAILGUN_API_KEY / MAILGUN_DOMAIN / MAILGUN_FROM / SPECODE_EMAIL_*) is needed to test in dev/staging. Custom Mailgun keys would only matter later for a bring-your-own sending domain.
+- **Centralized email sender**: `convex/email.ts` is the single sender. Callers pass a template key + data (templates in `convex/emailTemplates.ts`), never raw HTML or relay calls. Every send writes metadata-only to the `emailLog` table (messageId/to/template/status/tag/timestamp — never body or codes).
+- **Auth email flows live**: signup verification (`auth-email-verification`) and password reset (`auth-password-reset`) both route through the sender. Reset is OTP-code based via Better Auth `emailOTP` (Forgot password link on /login → /reset-password screen). Sign-in is NOT hard-gated on verification (`requireEmailVerification: false`), so seeded/new accounts can sign in immediately.

@@ -72,6 +72,18 @@ export function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Your password"
           />
+          <div className="mt-0.5 text-right">
+            <Link
+              to={
+                email.trim()
+                  ? `/reset-password?email=${encodeURIComponent(email.trim())}`
+                  : "/reset-password"
+              }
+              className="text-[13px] font-medium text-brand hover:text-brand-hover"
+            >
+              Forgot password?
+            </Link>
+          </div>
         </Field>
 
         {error && (

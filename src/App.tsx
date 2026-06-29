@@ -7,6 +7,7 @@ import { CatalogPage } from "@/pages/CatalogPage";
 import { ProductDetailPage } from "@/pages/ProductDetailPage";
 import { SignupPage } from "@/pages/SignupPage";
 import { LoginPage } from "@/pages/LoginPage";
+import { ResetPasswordPage } from "@/pages/ResetPasswordPage";
 import { IntakeFunnelPage } from "@/pages/IntakeFunnelPage";
 import { IntakeCompletePage } from "@/pages/IntakeCompletePage";
 import { OrdersPage } from "@/pages/OrdersPage";
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/catalog/:slug" element={<ProductDetailPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
 
         <Route
           path="/intake/complete"

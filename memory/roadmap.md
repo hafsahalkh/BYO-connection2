@@ -89,15 +89,16 @@ The coherent product the marketplace is incoherent without — broader than the 
 - [x] Patient auth (sign-up + sign-in) — shared Better Auth email/password flow; seeded patient example login verified
 - [x] Product/condition-specific intake questionnaire — 6-section funnel (personal, contact, medical history, allergies, medications, consent) with resume/progress tracking; completing consent creates a pre-payment order and stops before any payment step
 - [x] Patient "My Orders / Intake Status" authenticated screen — renders the patient's real orders and intake status via Convex queries
+- [x] Transactional email — auth flows only: centralized sender (`convex/email.ts`) + in-codebase templates (`convex/emailTemplates.ts`), `emailLog` metadata table, signup email verification + password-reset (Forgot password on /login → /reset-password). Sends via the Specode-managed Mailgun relay (no user env setup). Order/approval/shipment emails remain deferred.
+- [x] Payments (Stripe) — authorize-at-checkout via Stripe Checkout (manual capture). Intake completion hands the patient into Stripe Checkout to place an authorization hold; the order stays in `pending_review` with a separate `payment` state (`unpaid` → `authorized`). App-owned billing helpers in `convex/billing/*` (checkout action, `captureAuthorization`/`voidAuthorization`, plus an idempotent webhook at `/api/stripe/webhook`). Capture/void are built and ready for the provider-console iteration (no UI triggers them yet). Graceful no-key behavior so the app still builds/runs before Stripe is configured. My Orders reflects payment/authorization state via the status-pill system and lets unpaid/failed orders resume payment. Requires STRIPE_SECRET_KEY / STRIPE_PUBLISHABLE_KEY / STRIPE_WEBHOOK_SECRET in Project Settings; checkout must be tested on the deployed URL (Stripe does not load in the preview pane).
 
-> First build slice complete. Patient-only, zero third-party integrations, order/intake flow stops before payment by design.
+> Patient slice + auth email + payments complete. Checkout must be tested on the deployed URL (Stripe does not load in the preview pane).
 
 > Update this section as features are built. Check items off as they become real.
 
 ## Next Steps
-- **Iteration 2 — Payments**: add Stripe with authorize-at-checkout / capture-on-approval, completing the checkout step the first slice intentionally stopped before. One integration this iteration.
-- **Iteration 3 — Provider review console**: in-app approval queue, intake context view, approve/deny with reason; approved orders flow forward. Triggers prescription-decision state.
+- **Iteration 3 — Provider review console**: in-app approval queue, intake context view, approve/deny with reason; approved orders flow forward. Triggers prescription-decision state. On approval, call the existing `captureAuthorization` billing helper; on denial, call `voidAuthorization`. The review SLA must respect the ~7-day Stripe authorization-hold expiry (re-authorize if it lapses).
 - **Iteration 4 — Pharmacy fulfillment queue**: in-app worklist for approved prescriptions, compounded/shipped status, tracking attachment; patient status + shipment tracking wired up.
 - **Iteration 5 — Admin / operations**: catalog management and user/role management in an admin shell.
-- **Iteration 6 — Transactional email (Mailgun)**: account, order, approval/denial, and shipment notifications. One integration this iteration.
+- **Iteration 6 — Transactional email (Mailgun)**: auth verification + password reset are DONE (centralized sender, templates, emailLog, managed relay). Remaining: order-placed, approval/denial, and shipment notifications — add as new templates through the existing sender.
 - **Iteration 7 — Compliance hardening**: PHI audit logging and MFA for provider/pharmacy/admin roles.

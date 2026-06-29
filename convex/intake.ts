@@ -282,6 +282,7 @@ export const completeConsent = mutation({
       productCondition: product.condition,
       priceCents: product.priceCents,
       status: "pending_review",
+      payment: "unpaid",
     });
 
     return { orderId };

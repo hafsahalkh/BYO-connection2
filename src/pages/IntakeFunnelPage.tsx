@@ -189,7 +189,6 @@ export function IntakeFunnelPage() {
             } catch {
               /* ignore */
             }
-            navigate("/intake/complete", { replace: true });
           }}
         />
       )}

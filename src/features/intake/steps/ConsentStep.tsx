@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useMutation } from "convex/react";
+import { useNavigate } from "react-router-dom";
+import { useMutation, useAction } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import type { Doc, Id } from "../../../../convex/_generated/dataModel";
 import { StepBody } from "../IntakeShell";
@@ -45,7 +46,9 @@ export function ConsentStep({
   onComplete,
   onBack,
 }: StepProps) {
+  const navigate = useNavigate();
   const complete = useMutation(api.intake.completeConsent);
+  const startCheckout = useAction(api.billing.checkout.startCheckout);
   const [checked, setChecked] = useState<Record<string, boolean>>({
     consentTelehealth: patient?.consentTelehealth ?? false,
     consentPrivacy: patient?.consentPrivacy ?? false,
@@ -73,7 +76,27 @@ export function ConsentStep({
         consentTerms: checked.consentTerms,
         consentAccuracy: checked.consentAccuracy,
       });
+      // Let the parent clear funnel session state (product slug).
       onComplete(result.orderId);
+
+      // Authorize-at-checkout: hand the patient to Stripe Checkout to place an
+      // authorization hold (no charge until a provider approves later).
+      try {
+        const { url } = await startCheckout({
+          orderId: result.orderId as Id<"orders">,
+          origin: window.location.origin,
+        });
+        window.location.assign(url);
+        return;
+      } catch {
+        // Payments not configured yet, or checkout could not start. The order
+        // already exists (pending review, unpaid) so it is recoverable from
+        // My Orders, where the patient can resume payment.
+        navigate(`/orders?checkout=unavailable&order=${result.orderId}`, {
+          replace: true,
+        });
+        return;
+      }
     } catch {
       setSubmitting(false);
       setError("Something went wrong placing your order. Please try again.");
@@ -114,8 +137,9 @@ export function ConsentStep({
         </div>
 
         <div className="mt-6 rounded-[12px] border border-border bg-brand-tint px-4 py-3 text-[13px] leading-relaxed text-brand-hover">
-          You will not be charged today. Placing your order submits it for a
-          licensed clinician to review.
+          Next you'll add a payment method to reserve your order. Your card is
+          only authorized now — you are not charged unless a licensed clinician
+          approves your prescription.
         </div>
 
         {error && (
@@ -123,7 +147,7 @@ export function ConsentStep({
         )}
 
         <StepNav
-          nextLabel="Place order for review"
+          nextLabel="Continue to payment"
           submitting={submitting}
           onBack={onBack}
         />

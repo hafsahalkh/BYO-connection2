@@ -3,9 +3,10 @@ import { createClient, convexAdapter, type GenericCtx } from "@convex-dev/better
 import { convex, crossDomain } from "@convex-dev/better-auth/plugins";
 import { emailOTP, twoFactor } from "better-auth/plugins";
 import type { GenericDataModel } from "convex/server";
-import { components } from "./_generated/api";
+import { components, internal } from "./_generated/api";
 import authConfig from "./auth.config";
-import { sendEmail } from "./email";
+import { sendEmail, type EmailLogEntry } from "./email";
+import type { EmailTemplateKey } from "./emailTemplates";
 
 export const authClient = createClient(components.betterAuth);
 
@@ -71,9 +72,47 @@ function getTrustedOrigins(request?: Request): string[] {
   return origins;
 }
 
+// OTP code lifetime surfaced in template copy. Better Auth's emailOTP plugin
+// defaults to a 5-minute expiry.
+const OTP_EXPIRES_MINUTES = 5;
+
 export function createAuth(ctx: GenericCtx<GenericDataModel>, request?: Request) {
   // Use the request origin as siteUrl if it matches allowed patterns
   const siteUrl = getDynamicSiteUrl(request);
+
+  // Persist non-sensitive send metadata to the emailLog table (AC5). The auth
+  // handler dispatches OTP emails from a mutation/action context, so a
+  // `runMutation` is available; we guard for the query-ctx type member of the
+  // GenericCtx union (which can't write) and skip logging there.
+  const recordLog = async (entry: EmailLogEntry) => {
+    const runner = ctx as {
+      runMutation?: (ref: typeof internal.emailLog.record, args: {
+        messageId: string | null;
+        to: string;
+        template: string;
+        status: EmailLogEntry["status"];
+        tag: string;
+        timestamp: number;
+      }) => Promise<unknown>;
+    };
+    if (typeof runner.runMutation !== "function") return;
+    try {
+      await runner.runMutation(internal.emailLog.record, {
+        messageId: entry.messageId,
+        to: entry.to,
+        template: entry.template,
+        status: entry.status,
+        tag: entry.tag,
+        timestamp: entry.timestamp,
+      });
+    } catch (err) {
+      // Logging is best-effort; never let it block delivery.
+      console.error(
+        "emailLog record failed:",
+        err instanceof Error ? err.message : String(err),
+      );
+    }
+  };
 
   return betterAuth({
     baseURL: process.env.CONVEX_SITE_URL,
@@ -92,38 +131,31 @@ export function createAuth(ctx: GenericCtx<GenericDataModel>, request?: Request)
     },
     plugins: [
       emailOTP({
+        // Dispatch a verification email automatically on signup so the
+        // verification flow is testable end-to-end. Sign-in is NOT hard-gated
+        // on verification (requireEmailVerification stays false below), which
+        // keeps the seeded patient account and any new account able to sign in
+        // immediately while still receiving and being able to act on the code.
+        sendVerificationOnSignUp: true,
+        otpLength: 6,
+        expiresIn: OTP_EXPIRES_MINUTES * 60,
         async sendVerificationOTP({ email, otp, type }) {
-          const subject =
-            type === "sign-in"
-              ? "Your sign-in code"
-              : type === "email-verification"
-              ? "Verify your email"
-              : "Reset your password";
+          // Map Better Auth OTP types to in-codebase templates. Password reset
+          // arrives as "forget-password"; signup verification as
+          // "email-verification". "sign-in" reuses the verification template.
+          const template: EmailTemplateKey =
+            type === "forget-password"
+              ? "auth-password-reset"
+              : "auth-email-verification";
 
-          const title =
-            type === "sign-in"
-              ? "Sign in code"
-              : type === "email-verification"
-              ? "Verify your email"
-              : "Reset your password";
-
+          // Route through the centralized sender, which renders the template,
+          // attaches rate-limit metadata, sends via the managed relay, and
+          // records non-sensitive metadata to emailLog.
           await sendEmail({
             to: email,
-            subject,
-            html: `
-              <div style="font-family: sans-serif; max-width: 420px; margin: 0 auto; padding: 20px;">
-                <h2 style="color: #0f172a; margin-bottom: 12px;">${title}</h2>
-                <p style="color: #475569; margin-bottom: 16px;">
-                  Your verification code is:
-                </p>
-                <div style="display: inline-block; font-size: 28px; letter-spacing: 6px; font-weight: 700; color: #0f172a; padding: 10px 16px; border-radius: 10px; background: #f1f5f9;">
-                  ${otp}
-                </div>
-                <p style="color: #64748b; margin-top: 16px; font-size: 14px;">
-                  This code expires in 5 minutes. If you didn't request this, you can ignore this email.
-                </p>
-              </div>
-            `,
+            template,
+            data: { code: otp, expiresMinutes: OTP_EXPIRES_MINUTES },
+            recordLog,
           });
         },
       }),

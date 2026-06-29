@@ -123,7 +123,10 @@ export default defineSchema({
   }).index("by_authUserId", ["authUserId"]),
 
   // An order is created when an intake funnel completes for a product.
-  // It stops in a pre-payment state in this slice (no Stripe).
+  // After intake the patient is sent into Stripe Checkout to AUTHORIZE
+  // (manual-capture) payment. The order stays in "pending_review" while the
+  // authorization hold is open; capture/void happens on provider decision in
+  // a later iteration (see convex/billing/stripe.ts).
   orders: defineTable({
     authUserId: v.string(),
     patientId: v.id("patients"),
@@ -132,13 +135,47 @@ export default defineSchema({
     productName: v.string(),
     productCondition: v.string(),
     priceCents: v.number(),
-    // Lifecycle status for this slice. Stops before payment.
+    // Order lifecycle status. Remains "pending_review" once payment is
+    // authorized; provider approval/denial is a later iteration.
     status: v.union(
       v.literal("intake_complete"),
       v.literal("order_placed"),
       v.literal("pending_review"),
     ),
+    // Payment / authorization state, tracked separately from the clinical
+    // lifecycle status. "authorized" = funds held but NOT captured.
+    payment: v.union(
+      v.literal("unpaid"), // order created, checkout not yet completed
+      v.literal("authorized"), // Stripe hold placed, awaiting provider decision
+      v.literal("captured"), // funds taken (on provider approval — later iteration)
+      v.literal("voided"), // hold released (on denial/expiry — later iteration)
+      v.literal("failed"), // payment attempt failed
+    ),
+    // Stripe references for reconciliation and later capture/void.
+    stripeSessionId: v.optional(v.string()),
+    stripePaymentIntentId: v.optional(v.string()),
   })
     .index("by_authUserId", ["authUserId"])
-    .index("by_patient", ["patientId"]),
+    .index("by_patient", ["patientId"])
+    .index("by_stripeSessionId", ["stripeSessionId"])
+    .index("by_stripePaymentIntentId", ["stripePaymentIntentId"]),
+
+  // Transactional email send log (AC5). Stores ONLY non-sensitive metadata:
+  // never the email body/HTML, subject content, or any code/link inside it.
+  emailLog: defineTable({
+    messageId: v.union(v.string(), v.null()),
+    to: v.string(),
+    template: v.string(),
+    status: v.union(
+      v.literal("sent"),
+      v.literal("skipped"),
+      v.literal("error"),
+    ),
+    // Rate-limiting metadata (AC4).
+    tag: v.string(),
+    timestamp: v.number(),
+  })
+    .index("by_to", ["to"])
+    .index("by_template", ["template"])
+    .index("by_timestamp", ["timestamp"]),
 });
