@@ -1,7 +1,13 @@
 {
   "version": 7,
   "stage": "implementation",
-  "pending": null,
+  "pending": {
+    "kind": "question",
+    "phase": "implementation",
+    "askedAt": "2026-06-29T21:07:13.569Z",
+    "requestedAt": "2026-06-29T21:07:13.569Z",
+    "summary": "User wants intake reachable without prior login (reverse signup-first). Coordinator proposed guest-first intake with account creation moved to the final submit step (consent/place order) so the order ties to a real patient + My Orders. Awaiting confirmation or alternative (fully anonymous)."
+  },
   "questionRounds": {
     "planning": 2,
     "design": 1
@@ -22,6 +28,6 @@
       "guidelinesArchivedPath": "memory/design-guidelines/design-guidelines-20260629T203553Z.json"
     }
   },
-  "lastSummary": "Completed PeptideRx first build slice. All four surfaces built and verified: landing, catalog + product detail, shared patient auth + 6-section intake funnel (stops before payment), and real My Orders / Intake Status screen. 6 products seeded in Convex. Patient example login seeded and sign-in verified end-to-end (HTTP 200 + session). Convex sync, pnpm lint, and production build all pass.",
-  "updatedAt": "2026-06-29T20:59:32.961Z"
+  "lastSummary": "Flow-change request: make intake completable without prior login. Proposed guest-first intake with account creation at final submit; awaiting user confirmation before implementing.",
+  "updatedAt": "2026-06-29T21:07:13.652Z"
 }
