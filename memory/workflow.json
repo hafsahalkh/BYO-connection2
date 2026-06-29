@@ -2,11 +2,14 @@
   "version": 7,
   "stage": "design",
   "pending": {
-    "kind": "question",
+    "kind": "review",
     "phase": "design",
-    "askedAt": "2026-06-29T20:25:03.546Z",
-    "requestedAt": "2026-06-29T20:25:03.546Z",
-    "summary": "Round 1 design discovery: brand direction (Clinical Trust / Aspirational Wellness / Modern Apothecary), intake tone, reference assets."
+    "artifact": "design",
+    "path": "memory/design-brief.md",
+    "version": 1,
+    "askedAt": "2026-06-29T20:39:03.128Z",
+    "requestedAt": "2026-06-29T20:39:03.128Z",
+    "summary": "Warm-but-clinically-grounded direction for PeptideRx: warm off-white base, deep botanical green primary, muted terracotta secondary; editorial-premium landing, calm clinical intake/orders. Concrete tokens captured for implementation."
   },
   "questionRounds": {
     "planning": 2,
@@ -21,13 +24,13 @@
     },
     "design": {
       "path": "memory/design-brief.md",
-      "version": null,
-      "archivedPath": null,
+      "version": 1,
+      "archivedPath": "memory/design-briefs/design-brief-20260629T203553Z.md",
       "approvedVersion": null,
       "guidelinesPath": "memory/design-guidelines.json",
-      "guidelinesArchivedPath": null
+      "guidelinesArchivedPath": "memory/design-guidelines/design-guidelines-20260629T203553Z.json"
     }
   },
-  "lastSummary": "Design phase started. Round 1 discovery sent: brand direction options, intake tone, reference-assets ask. Awaiting user reply.",
-  "updatedAt": "2026-06-29T20:25:03.627Z"
+  "lastSummary": "Warm-but-clinically-grounded direction for PeptideRx: warm off-white base, deep botanical green primary, muted terracotta secondary; editorial-premium landing, calm clinical intake/orders. Concrete tokens captured for implementation.",
+  "updatedAt": "2026-06-29T20:39:03.200Z"
 }

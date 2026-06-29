@@ -1,0 +1,134 @@
+{
+  "directionSummary": "Warm-but-clinically-grounded telehealth marketplace. Premium, aspirational polish on the public landing and catalog; quiet clinical clarity on auth, intake, and orders. Warm off-white paper base with tinted neutrals, anchored by a single deep botanical-green primary that signals real, modern medicine over reflexive medical-teal or supplement-bright palettes, with a muted terracotta secondary for human warmth. Not stark clinical white, not a dark tech theme. Landing earns trust through editorial generosity; intake earns it through calm, private, section-by-section pacing with reassuring microcopy.",
+  "brand": {
+    "personality": ["clinically credible", "calm", "premium", "modern", "honest"],
+    "mood": "Reassuring and grounded. Confident without being loud; warm without being soft on safety.",
+    "keywords": ["trustworthy", "calm", "premium", "clinical", "warm", "precise"]
+  },
+  "palette": {
+    "background": "#FAF8F4",
+    "surface": "#F4F1EB",
+    "primary": "#2F5D50",
+    "secondary": ["#C57B57", "#DCE6DF"],
+    "semantic": {
+      "success": "#3E7C5A",
+      "warning": "#B8801F",
+      "error": "#C0473E",
+      "info": "#4A6B7A"
+    },
+    "extended": {
+      "primaryHover": "#234A40",
+      "primaryTint": "#E8F0EC",
+      "ink": "#1E2420",
+      "textMuted": "#5C6560",
+      "border": "#E5E0D8",
+      "borderStrong": "#D8D2C7",
+      "white": "#FFFFFF"
+    },
+    "colorStrategy": "Restrained on product surfaces (tinted neutrals + one accent); Committed green on landing brand moments. All neutrals warm-tinted toward the green hue; no pure #000 or #fff."
+  },
+  "typography": {
+    "display": "Humanist serif for landing hero and major section headlines (e.g. Fraunces, Source Serif, or Newsreader). Large sizes on marketing surfaces only; not used for product chrome.",
+    "body": "Clean humanist sans for all body, forms, labels, tables, and product UI (e.g. Inter, or warmer Hanken Grotesk / Mulish). Carries the full intake and orders experience.",
+    "notes": [
+      "Type scale ratio >= 1.25 between steps",
+      "Weight contrast: regular body, semibold labels, serif reserved for display",
+      "Body line length capped 65-75ch on landing long-form",
+      "Intake and orders are sans-only for calm, legible, EHR-grade reading without coldness",
+      "Suggested scale (px): 13, 14, 16 (base), 20, 25, 31, 39, 49, 61"
+    ],
+    "scale": {
+      "xs": "13px",
+      "sm": "14px",
+      "base": "16px",
+      "lg": "20px",
+      "xl": "25px",
+      "2xl": "31px",
+      "3xl": "39px",
+      "4xl": "49px",
+      "5xl": "61px"
+    }
+  },
+  "layout": {
+    "direction": "Spacious editorial on landing/catalog; balanced-to-compact on authenticated product surfaces. Density matched to surface, not one global setting.",
+    "navigation": "Public top nav with prominent Get Started CTA on landing/catalog; viewport-centered auth with brand above form and no app chrome; intake runs as a stand-alone funnel surface with main nav hidden; My Orders uses a minimal top bar (no heavy sidebar in this slice).",
+    "density": "spacious-on-marketing, balanced-on-product",
+    "notes": [
+      "Alternate full-bleed and contained sections with varied spacing for rhythm",
+      "Avoid wrapping everything in containers; let some sections breathe full-width",
+      "No identical card grids; vary section structure",
+      "8px spacing base; common steps 4, 8, 12, 16, 24, 32, 48, 64, 96"
+    ],
+    "spacing": {
+      "base": "8px",
+      "steps": ["4px", "8px", "12px", "16px", "24px", "32px", "48px", "64px", "96px"]
+    },
+    "radius": {
+      "input": "10px",
+      "card": "12px",
+      "feature": "16px",
+      "pill": "999px"
+    },
+    "shadows": {
+      "sm": "0 1px 2px rgba(30,36,32,0.06)",
+      "card": "0 4px 16px rgba(30,36,32,0.08)",
+      "raised": "0 8px 28px rgba(30,36,32,0.10)"
+    }
+  },
+  "components": {
+    "surfaces": [
+      "Soft, lightly elevated cards on warm surface tint",
+      "Medium radius (12px default, 16px feature cards)",
+      "Subtle warm-toned shadows, low spread",
+      "No nested cards; no glassmorphism"
+    ],
+    "forms": [
+      "Generous field height (44px+), labels above inputs",
+      "Soft borders deepening to green on focus with a calm focus ring",
+      "Roomy spacing on intake; low-anxiety, no dense gridlock",
+      "Quiet, instructive error states; never red-flashing"
+    ],
+    "actions": [
+      "Single primary per view: solid deep green, white text",
+      "Secondary: outline or low-tint; tertiary: text link",
+      "Radius matching cards; confident but not glowing (no neon CTA)"
+    ],
+    "dataDisplay": [
+      "My Orders as status cards / list rows",
+      "Calm status pill system (Intake Complete, Order Placed, Pending Review) mapped to muted semantic palette",
+      "Status never conveyed by color alone; pair with label/icon",
+      "Real patient data, not a metrics-dashboard template"
+    ]
+  },
+  "intakeFunnel": {
+    "header": "standard (logo + app name, breathing room, no tagline, main nav hidden)",
+    "progressIndicator": "numbered step circles with section labels on desktop; thin progress bar on mobile",
+    "stepRhythm": "grouped questions per section (one screen per section, 3-6 fields)",
+    "tone": "warm-and-reassuring (microcopy explains why sensitive questions are asked; soft framing on allergies and medications)",
+    "resumeLater": "subtle text link in the funnel header (signup-first, no guest mode)",
+    "transitions": "slide-from-right on Next, fade on Back",
+    "mobileHeader": "sticky logo + thin progress bar; drops step labels"
+  },
+  "motion": {
+    "tone": "restrained",
+    "principles": [
+      "Purposeful and calm; never decorative",
+      "Ease-out exponential curves; no bounce or elastic",
+      "Landing: gentle reveal-on-scroll, soft hover lifts",
+      "Intake: slide-from-right on Next, fade on Back",
+      "Never animate CSS layout properties",
+      "Loading and status changes resolve quietly"
+    ]
+  },
+  "skillsUsed": ["frontend-design", "intake-onboarding-design"],
+  "skillPackIds": ["frontend-design", "intake-onboarding-design"],
+  "references": [
+    {
+      "label": "No reference assets provided",
+      "url": "",
+      "imagePath": "",
+      "rationale": "Direction derived from product positioning (real prescribing telehealth, premium consumer health) and the patient trust journey rather than uploaded references."
+    }
+  ],
+  "referenceQueries": []
+}
