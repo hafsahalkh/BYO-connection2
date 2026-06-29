@@ -1,26 +1,23 @@
 {
   "version": 7,
-  "stage": "planning",
+  "stage": "design",
   "pending": {
-    "kind": "review",
-    "phase": "planning",
-    "artifact": "roadmap",
-    "path": "memory/roadmap.md",
-    "version": 1,
-    "askedAt": "2026-06-29T20:17:47.589Z",
-    "requestedAt": "2026-06-29T20:17:47.589Z",
-    "summary": "Initial roadmap for PeptideRx D2C peptide marketplace: in-app provider review + pharmacy fulfillment, 4 roles, patient-led first build slice with zero integrations, Stripe/email/audit/MFA in later iterations."
+    "kind": "question",
+    "phase": "design",
+    "askedAt": "2026-06-29T20:25:03.546Z",
+    "requestedAt": "2026-06-29T20:25:03.546Z",
+    "summary": "Round 1 design discovery: brand direction (Clinical Trust / Aspirational Wellness / Modern Apothecary), intake tone, reference assets."
   },
   "questionRounds": {
     "planning": 2,
-    "design": 0
+    "design": 1
   },
   "artifacts": {
     "roadmap": {
       "path": "memory/roadmap.md",
       "version": 1,
       "archivedPath": null,
-      "approvedVersion": null
+      "approvedVersion": 1
     },
     "design": {
       "path": "memory/design-brief.md",
@@ -31,6 +28,6 @@
       "guidelinesArchivedPath": null
     }
   },
-  "lastSummary": "Initial roadmap for PeptideRx D2C peptide marketplace: in-app provider review + pharmacy fulfillment, 4 roles, patient-led first build slice with zero integrations, Stripe/email/audit/MFA in later iterations.",
-  "updatedAt": "2026-06-29T20:17:47.679Z"
+  "lastSummary": "Design phase started. Round 1 discovery sent: brand direction options, intake tone, reference-assets ask. Awaiting user reply.",
+  "updatedAt": "2026-06-29T20:25:03.627Z"
 }
