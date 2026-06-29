@@ -2,11 +2,14 @@
   "version": 7,
   "stage": "planning",
   "pending": {
-    "kind": "question",
+    "kind": "review",
     "phase": "planning",
-    "askedAt": "2026-06-29T20:15:22.586Z",
-    "requestedAt": "2026-06-29T20:15:22.586Z",
-    "summary": "Round 2: payment timing (pay-upfront vs charge-on-approval), admin/ops role presence, and generic vs per-product intake gating."
+    "artifact": "roadmap",
+    "path": "memory/roadmap.md",
+    "version": 1,
+    "askedAt": "2026-06-29T20:17:47.589Z",
+    "requestedAt": "2026-06-29T20:17:47.589Z",
+    "summary": "Initial roadmap for PeptideRx D2C peptide marketplace: in-app provider review + pharmacy fulfillment, 4 roles, patient-led first build slice with zero integrations, Stripe/email/audit/MFA in later iterations."
   },
   "questionRounds": {
     "planning": 2,
@@ -15,7 +18,7 @@
   "artifacts": {
     "roadmap": {
       "path": "memory/roadmap.md",
-      "version": null,
+      "version": 1,
       "archivedPath": null,
       "approvedVersion": null
     },
@@ -28,6 +31,6 @@
       "guidelinesArchivedPath": null
     }
   },
-  "lastSummary": "Planning round 2 sent: asked about checkout payment timing relative to provider approval, whether an ops/admin role exists, and generic vs condition-specific intake gating.",
-  "updatedAt": "2026-06-29T20:15:22.663Z"
+  "lastSummary": "Initial roadmap for PeptideRx D2C peptide marketplace: in-app provider review + pharmacy fulfillment, 4 roles, patient-led first build slice with zero integrations, Stripe/email/audit/MFA in later iterations.",
+  "updatedAt": "2026-06-29T20:17:47.679Z"
 }
