@@ -47,8 +47,6 @@ export const startCheckout = action({
 
     const { sessionId, url } = await createAuthorizationCheckout({
       orderId: order._id,
-      productName: order.productName,
-      productCondition: order.productCondition,
       amountCents: order.priceCents,
       customerEmail: identity.email ?? undefined,
       successUrl,

@@ -42,8 +42,6 @@ export function isStripeConfigured(): boolean {
 
 type CreateCheckoutParams = {
   orderId: string;
-  productName: string;
-  productCondition: string;
   amountCents: number;
   customerEmail?: string;
   successUrl: string;
@@ -74,8 +72,7 @@ export async function createAuthorizationCheckout(
           currency: "usd",
           unit_amount: params.amountCents,
           product_data: {
-            name: params.productName,
-            description: `Clinical review for ${params.productCondition}`,
+            name: "Consultation deposit",
           },
         },
       },
