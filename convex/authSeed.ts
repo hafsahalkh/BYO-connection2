@@ -3,13 +3,13 @@
 // The Better Auth Convex component adapter is dynamically typed; the seed
 // utility intentionally uses `any` to call its generic adapter mutations.
 
-import { action } from "./_generated/server";
+import { internalAction } from "./_generated/server";
 import { v } from "convex/values";
 import { components } from "./_generated/api";
 import { createAuth } from "./auth";
 import { hashPassword } from "better-auth/crypto";
 
-export const exampleLogins = action({
+export const exampleLogins = internalAction({
   args: {
     accounts: v.array(
       v.object({

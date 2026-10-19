@@ -1,4 +1,4 @@
-import { query, mutation } from "./_generated/server";
+import { query, internalMutation } from "./_generated/server";
 import { v } from "convex/values";
 
 const productReturnValidator = v.object({
@@ -172,7 +172,7 @@ const seedProducts = [
 ];
 
 // Idempotent catalog seed. Safe to re-run; existing slugs are patched.
-export const seedCatalog = mutation({
+export const seedCatalog = internalMutation({
   args: {},
   returns: v.object({ inserted: v.number(), updated: v.number() }),
   handler: async (ctx) => {

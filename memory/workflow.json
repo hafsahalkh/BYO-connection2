@@ -11,17 +11,19 @@
       "path": "memory/roadmap.md",
       "version": 1,
       "archivedPath": null,
+      "contentDigest": null,
       "approvedVersion": 1
     },
     "design": {
       "path": "memory/design-brief.md",
       "version": 1,
       "archivedPath": "memory/design-briefs/design-brief-20260629T203553Z.md",
+      "contentDigest": null,
       "approvedVersion": 1,
       "guidelinesPath": "memory/design-guidelines.json",
       "guidelinesArchivedPath": "memory/design-guidelines/design-guidelines-20260629T203553Z.json"
     }
   },
-  "lastSummary": "Checked off Iteration 2 — Payments (Stripe authorize-at-checkout via Checkout manual capture, app-owned billing helpers, idempotent webhook). Updated Next Steps so provider-console iteration triggers capture/void and respects the ~7-day hold expiry.",
-  "updatedAt": "2026-06-29T21:31:03.516Z"
+  "lastSummary": "Frozen HIPAA remediation checklist: exactly 89483910-fd0f-4fb7-94ca-2a3864d170a0 (HIPAA-AC-011), verified fixed/resolved by completed targeted scan d139fce6-999b-4da4-8b83-b2865f5ee110. Only two backend files changed: authSeed.exampleLogins registration/import to internalAction and products.seedCatalog to internalMutation; validators, handlers, trusted CLI name, manifest, roles, credentials, auth routing and public catalog queries unchanged. Native pnpm exec tsc -b and pnpm lint passed; Convex synced with native typecheck enabled. Deployed function metadata confirmed both provisioning exports internal and both catalog reads public, without executing seeds or changing user/catalog data. Final diff reviewed, git diff --check passed. No existing automated tests found; ordinary signup/sign-in/OTP reset and catalog routes/dependencies inspected end-to-end in source, not browser-tested. Initial metadata assertion used wrong visibility shape; corrected to visibility.kind and passed. No other HIPAA issues addressed; routine visibility-only fix did not change product roadmap scope.",
+  "updatedAt": "2026-10-19T19:27:51.375Z"
 }
