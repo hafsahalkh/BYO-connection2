@@ -4,7 +4,7 @@
 // template key, status, a rate-limiting tag, and the timestamp. The email body,
 // subject content, OTP codes, and reset links are NEVER persisted or logged.
 
-import { internalMutation, query } from "./_generated/server";
+import { internalMutation, internalQuery } from "./_generated/server";
 import { v } from "convex/values";
 
 export const record = internalMutation({
@@ -34,7 +34,7 @@ export const record = internalMutation({
 });
 
 // Lightweight recent-sends query for verification/debugging. Metadata only.
-export const recent = query({
+export const recent = internalQuery({
   args: { limit: v.optional(v.number()) },
   returns: v.array(
     v.object({
