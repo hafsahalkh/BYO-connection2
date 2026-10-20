@@ -3,6 +3,7 @@ import { registerStaticRoutes } from "@convex-dev/static-hosting";
 import { components } from "./_generated/api";
 import { authClient, createAuth } from "./auth";
 import { stripeWebhook } from "./billing/webhook";
+import { registerSpecodeRoutes } from "./specode/routes";
 
 const http = httpRouter();
 
@@ -16,5 +17,8 @@ http.route({
   method: "POST",
   handler: stripeWebhook,
 });
+
+// Specode release routes (frontend uploads, health).
+registerSpecodeRoutes(http);
 
 export default http;
